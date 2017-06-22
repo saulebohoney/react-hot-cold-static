@@ -24,12 +24,32 @@ export default class Game extends React.Component {
 
   handleNewGuess(guess){
     const newGuessArray = [...this.state.guessedSoFar, guess];
+    handleIsValid(guess);
     this.setState({
       guessedSoFar: newGuessArray
     })
     this.handleGuessCount();
   }
 
+
+ handleIsValid(guess){
+   const guessLength = guess.split('').length;
+   const guessedSoFar = this.state.guessedSoFar;
+   const isGuessed = guessedSoFar.includes(guess);
+     if(typeof(guess) !== 'Number'){
+           return "It need to be the number!"
+       }
+
+    if (guessLength > 2){
+       return "It needs to be between 1 and 99!"
+      }
+    }
+   
+     if (isGuessed) {
+       return  "You have already guessed that!"
+     }
+
+}
   handleRandomNumber(){
     const newNumber = Math.floor(Math.random() * (1 - 99));
     this.setState({
@@ -37,15 +57,20 @@ export default class Game extends React.Component {
     })
   }
 
-  // handleFeedback(guess){
-  //   if(guess is in this.state.guessedSoFar){
-  //     setState({
-  //       feedback: "You've guessed that!"
-  //     })
-  //   }
-  //   const guessDistance = this.state.correctAnswer - guess;
-
-  // }
+  handleFeedback(guess){
+    const guessDistance = Math.abs(this.state.correctAnswer - guess);
+    if(guessDistance === 0){
+      return "You got!"
+    }else  if (guessDistance <= 5){
+       return "Super Hot!"
+     } else if(guessDistance <=15){
+       return "You are getting warmer!"
+     }else if (guessDistance <=25){
+       return "Cold!"
+     }else if (guessDistance <= 99){
+       return "You are in the Artic!"
+     }
+  }
 
   // newGame(){
   //   handleRandomNumber();
