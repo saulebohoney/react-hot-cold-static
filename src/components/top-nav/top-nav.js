@@ -1,12 +1,14 @@
 import React from 'react';
 
+import InfoModal from '../info-modal/info-modal.js';
+
 import './top-nav.css';
 
 export default function TopNav(props) {
     return (
         <nav>
             <ul className="clearfix">
-                <li>
+                <li onClick={()=> props.onClick()}>
                     <a className="what" href="#">
                         What?
                     </a>
