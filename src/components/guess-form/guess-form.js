@@ -12,6 +12,7 @@ export default class GuessForm extends React.Component {
         <input
           type="text"
           ref={input => (this.input = input)}
+          onSubmit={(input)=> input.reset()}
           name="userGuess"
           id="userGuess"
           className="text"
@@ -25,6 +26,7 @@ export default class GuessForm extends React.Component {
           onClick={(e) => {
             e.preventDefault();
             this.props.onValue(this.input.value);
+            this.input.value = '';
           }}
           id="guessButton"
           className="button"
